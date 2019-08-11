@@ -4,7 +4,7 @@
 
 언어는 C++
 
-### RDBMS 와 비교
+## RDBMS 와 비교
 
 |RDBMS|MongoDB|
 |--|--|
@@ -15,7 +15,7 @@
 |join|linking or EmbeddedDocuments|
 |pk|_id|
 
-### 특징
+## 특징
 
 - Schema-less
 - pk는 자동 설정 (_id)
