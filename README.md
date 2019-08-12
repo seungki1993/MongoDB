@@ -1,6 +1,5 @@
 ## MongoDB study
 
-###
 
 #### 개요
 
