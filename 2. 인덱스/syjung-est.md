@@ -33,5 +33,72 @@
 
 ### MongoDB 인덱스
  - WiredTiger는 B-Tree와 LSM 둘다 지원함. 성능비교해놓은 사람이 있다. 책에는 B-Tree에 대한 설명밖에 없음.
- - https://github.com/wiredtiger/wiredtiger/wiki/Btree-vs-LSM
- - 
+ - 같이봅시다 : https://github.com/wiredtiger/wiredtiger/wiki/Btree-vs-LSM
+
+#### 인덱스 생성
+~~~
+ db.{db명}.createIndex(옵션)
+~~~
+ - 순서대로 오름차순(1), 내림차순(-1) 로 정할수있음
+
+#### unique
+~~~
+ db.{db명}.createIndex({필드명:1or-1}, {unique: true})
+~~~
+ - PK로, 같은 username값을 넣으려고 하면 duplicated error
+ - 당연한 말이지만, 기존에 있던 데이터에 unique 걸순 있지만 에러날수있음.
+ - dropDups로 중복된 항목들을 지울수 있지만 랜덤임
+
+#### 희소인덱스
+ - 인덱스의 키가 null이 아닌 값을 가지고 있는 document들만 존재한다.
+ - 데이터 키가 대부분 null인 경우 유용하다.
+~~~
+ db.{db명}.createIndex({필드명:1or-1}, {unique:true, sparse: true})
+~~~
+
+#### 다중키 인덱스
+~~~
+ db.{db명}.createIndex({필드명:1or-1, "필드명2:1or-1" ... }, {unique: true})
+~~~
+
+#### 해시 인덱스
+~~~
+ db.{db명}.createIndex({필드명:'hashed'})
+~~~
+ - equals query는 정상작동, 범위 쿼리는 지원되지 않음.
+ - 다중키 해시 인덱스는 허용되지 않는다.
+ - 부동 소수점값은 해시가 되기 전에 정수로 변환 (ex> hashed 4.1 = hashed 4.2)
+ - key와 Data가 균등하게 분배되지 않을 때 사용한다.
+
+#### 지리공간적 인덱스
+ - 각 document에 저장된 위도값과 경도값에 따라 document를 특정 위치에 가까이 배치한다.
+
+### 인덱스 관리
+ - ensureIndex() -> createIndex()로 바뀜
+ - 인덱스 생성할때
+    1. 인덱스할 값을 정렬한다.
+    2. 정렬된 값들이 인덱스로 삽입된다.
+
+#### 인덱스 검색
+~~~
+ db.system.indexes.find()
+~~~
+
+#### 인덱스 삭제
+~~~
+ db.{db명}.dropIndex("index명")
+~~~
+
+#### 인덱스 재구성
+ - Changed in version 4.2, Deprecated됨 
+~~~
+ db.{db명}.reindex();
+~~~
+
+#### 오프라인 인덱스
+ - 한 복제 노드를 오프라인 상태로 바꾸고 인덱스 구축 후 마스터 노드로부터 업데이트 받는다. 그 이후에 이 노드를 프라이머리 노드로 변경하고, 다른 세컨더리 노드들을 오프라인 상태로 바꾼 후에 인덱스 구축
+
+### 기타 ~
+ - 이미 존재하는 데이터의 양이 많은 상태에서 Index를 생성하려면 오래걸릴수있음.
+ - 되도록 첨부터 구축하고 쓰세요
+ - 인덱스 생성되는중엔 Client들이 데이터 읽기, 쓰기 불가능 -> background 인덱싱 가능
