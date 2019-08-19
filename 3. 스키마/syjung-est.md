@@ -106,3 +106,7 @@
 |column|field|field|
 |join|multiIndex Search|linking or EmbeddedDocuments|
 |pk|_id(prefix)|_id(prefix)|
+- https://db-engines.com/en/system/Elasticsearch%3BMongoDB
+
+### 기타 ~
+ - MongoDB를 선택하기전에 :  https://haru.kafra.kr/16
