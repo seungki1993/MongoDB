@@ -129,14 +129,47 @@ db.collection.replaceOne(
 ~~~
 
 #### filter
+ - Update시킬 document 필터링
+ - find 메서드 문법
 
 #### replacement
+ - 업데이트시킬 내용
+ - 업데이트 연산자
 
-#### option 
+ |연산자|설명|
+ |---|---|
+ |$inc|주어진 값에 따라 필드를 증가시킨다.|
+ |$set|필드를 주어진 값으로 변경한다.|
+ |$unset|전달받은 필드의 설정을 해제한다.|
+ |$rename|필드의 이름변경|
+ |$setOnInsert|upsert에서 삽입이 발생할 때만 필드 설정|
+ |$bit|필드의 비트단위 업데이트 수행|
 
+#### option
+ - upsert : upsert 여부
+ - writeConcern : 레플리카, 샤드 클러스터에 대한 쓰기조건
+ - collation : collation 설정정보
 
+#### findAndModify
+ - 도큐먼트를 자동으로 업데이트하고 어벧이트된 도큐먼트를 반환한다.
+ - 이 명령어를 통해 트랜잭션 비슷한것을 구축할 수 있다.
+ - atamic한 특성으로, 각 명령마다 lock을 걸고 update를 수행한다.
+
+~~~
+db.collection.findAndModify({
+  query : {
+      <query>
+    },
+  update: {
+      <update>
+  }
+})
+~~~
 
 ### D(Delete)
+~~~
+db.collection.remove(<filter>)
+~~~
 ~~~
 db.collection.deleteOne(
    <filter>,
