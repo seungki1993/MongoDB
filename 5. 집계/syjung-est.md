@@ -84,11 +84,34 @@ db.collection.aggregate([
 ~~~
 { "_id" : 1, "item" : "ABC1", sizes: [ "S", "M", "L"] }
 ->
-db.inventory.aggregate( [ { $unwind : "$sizes" } ] )
+db.collection.aggregate( [ { $unwind : "$sizes" } ] )
 ->
 { "_id" : 1, "item" : "ABC1", "sizes" : "S" }
 { "_id" : 1, "item" : "ABC1", "sizes" : "M" }
 { "_id" : 1, "item" : "ABC1", "sizes" : "L" }
 ~~~
 
-####
+#### $out
+ - 질의의 결과값을 컬렉션에 저장한다.
+ - 파이프라인의 마지막 연산자여야함.
+ - 이미 있는 컬렉션일 경우 덮어쓰게된다.
+ - view 같이 사용
+~~~
+db.collection.aggregate( [
+ { $group : { _id : "$author", books: { $push: "$title" } } },
+ { $out : "authors" }
+] )
+~~~
+
+### 함수
+ - 문자열함수, 산술함수, 날짜/시간함수, 논리함수, 집합함수 등 다양하게 제공
+ - https://docs.mongodb.com/manual/reference/operator/aggregation/
+
+### 옵션
+ - explain() : 파이프라인 프로세스 세부정보만 반환. 도큐먼트 몇개 스캔했고, 인덱스는 뭘 썼는지 등등.
+ - allowDiskUse : 중간 결과를 위해 디스크를 사용한다.
+ - cursor : 초기 배치 크기를 지정한다.
+
+### 집계와 성능
+ - 파이프라인에서 가능한 한 도큐먼트 수를 줄여나간다.
+ - 인덱스는 $match, $sort 작업에서만 사용할 수 있다.
