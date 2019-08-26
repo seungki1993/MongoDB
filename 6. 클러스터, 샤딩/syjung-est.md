@@ -2,26 +2,26 @@
 #### 샤딩
  - 데이터베이스를 작은 조각으로 분할하여 단일 머신이 모든 데이터를 저장하거나 전체 로드를 처리하지 않도록하기위해 고안된것. DB의 수평분할.
  - 저명한 구현체
- 아파치 HBase: 자동 샤딩을 제공한다.
- Azure SQL Database Elastic Database tools
- 카우치베이스 서버: 자동 투명 샤딩, 최고 성능 제공.
- CUBRID: 버전 9.0부터 샤딩 지원
- 일래스틱서치
- eXtreme Scale
- 하이버네이트 샤드
- IBM 인포믹스
- Kdb+: 버전 2.0부터 샤딩 지원
- MonetDB
- 몽고DB: 버전 1.6부터 샤딩 지원
- MySQL 클러스터
- MySQL 패브릭 (MySQL 유틸리티의 일부)
- 오라클 데이터베이스 샤딩
- 오라클 NoSQL 데이터베이스
- OrientDB: 버전 1.7부터 샤딩 지원
- Solr 엔터프라이즈 서치 서버
- 스패너
- SQLAlchemy ORM
- The DWH of Teradata
+ 아파치 HBase: 자동 샤딩을 제공한다.  
+ Azure SQL Database Elastic Database tools  
+ 카우치베이스 서버: 자동 투명 샤딩, 최고 성능 제공.  
+ CUBRID: 버전 9.0부터 샤딩 지원  
+ 일래스틱서치  
+ eXtreme Scale  
+ 하이버네이트 샤드  
+ IBM 인포믹스  
+ Kdb+: 버전 2.0부터 샤딩 지원  
+ MonetDB  
+ 몽고DB: 버전 1.6부터 샤딩 지원  
+ MySQL 클러스터  
+ MySQL 패브릭 (MySQL 유틸리티의 일부)  
+ 오라클 데이터베이스 샤딩  
+ 오라클 NoSQL 데이터베이스  
+ OrientDB: 버전 1.7부터 샤딩 지원  
+ Solr 엔터프라이즈 서치 서버  
+ 스패너  
+ SQLAlchemy ORM  
+ The DWH of Teradata  
 
 #### 목적
  - 저장소 분산과 부하 분산
